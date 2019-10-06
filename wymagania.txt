@@ -1,0 +1,44 @@
+Warunki zaliczenia laboratorium z paradygmatów programowania
+------------------------------------------------------------
+
+1) Na każde laboratorium ogłoszona będzie lista zadań, które
+   należy rozwiązać w trakcie trwania zajęć. Zadania należy
+   rozwiązać w oparciu o omawiane na wykładzie techniki
+   programistyczne, przy użyciu wskazanych języków Scala / 
+   Ocaml / Java - określone przez prowadzącego.
+
+2) Na liście będą znajdowały się zadania o różnym stopniu
+   trudności. Do każdego z zadań podana będzie odpowiednia 
+   punktacja razem z treścią.
+
+3) Sumarycznie za każdą listę można otrzymać 10 punktów.
+
+4) Ocena końcowa będzie zależała od otrzymanej liczby punktów 
+   z wszystkich list w stosunku do sumarycznej liczby wszystkich
+   punktów możliwych do zdobycia:
+   0  - 50%  - 2.0
+   51 - 60%  - 3.0
+   61 - 70%  - 3.5
+   71 - 80%  - 4.0
+   81 - 90%  - 4.5
+   91 - 100% - 5.0
+
+5) Oddanie zadań po terminie zajęć będzie wiązało się z 
+   obniżeniem punktacji za zadania:
+   1 tydzień           - 50% punktów
+   > 1 tydzień            0% punktów
+
+6) Uczestnictwo w zajęciach laboratoryjnych jest obowiązkowe.
+   Dopuszczalne są 3 nieobecności nieusprawiedliwione, każda
+   kolejna nieobecność nieusprawiedliwiona będzie skutkowała
+   obniżeniem oceny końcowej o 1.
+
+7) Oddanie zadań po terminie w przypadku nieobecności
+   usprawiedliwionej nie niesie za sobą konsekwencji punktowych,
+   o ile zaległe listy zostaną oddane na następnych zajęciach.
+
+8) Studenci zobowiązani są do samodzielnego rozwiązywania zadań.
+   Próba rozliczenia zadania, którego student nie jest autorem, 
+   blokuje możliwość rozliczenia danego laboratorium (zero oddanych 
+   zadań), a w przypadku recydywy, skutkuje oceną niedostateczną z 
+   przedmiotu.
