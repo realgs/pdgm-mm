@@ -1,1 +1,1 @@
-# pdgm-mm
+# Paradygmaty Programowania kurs PWr
