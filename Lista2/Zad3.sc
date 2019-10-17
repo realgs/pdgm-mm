@@ -14,4 +14,4 @@ def polacz[A](ls1:List[A], ls2:List[A]):List[A]={
    wywołanie: polacz [5;4;3;2] [1;2;3;4;5;6]
    wynik    : [5;1;4;2;3;3;2;4;5;6]
  */
-polacz(List(5, 4, 3, 2), List(1,2,3,4,5,6))
+polacz(List(5, 4, 3, 2), List(1,2,3,4,5,6,7))
