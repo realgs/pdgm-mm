@@ -6,12 +6,12 @@
   Porządek elementów musi być zachowany. Elementy w listach mogą (i będą) się powielać.
   Wynik zwróć w postaci pary list.
  */
-def podziel(ls:List[Int]):(List[Int], List[Int])={
+def divide(ls:List[Int]):(List[Int], List[Int])={
   if(ls.isEmpty)(Nil, Nil)
   else if(ls.head<0){
-    (if(ls.head%2==0)podziel(ls.tail)._2 else ls.head::podziel(ls.tail)._2,ls.head::podziel(ls.tail)._1)
+    (if(ls.head%2==0)divide(ls.tail)._2 else ls.head::divide(ls.tail)._2,ls.head::divide(ls.tail)._1)
   }
-  else podziel(ls.tail)
+  else divide(ls.tail)
 }
 
-podziel(List(-3, -6, 8, -9, 13))
+divide(List(-3, -6, 8, -9, 13))
