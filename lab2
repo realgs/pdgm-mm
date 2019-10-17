@@ -1,0 +1,48 @@
+object lab2 {
+  def main(args: Array[String]): Unit = {
+    println(i_list_size(List(1, 2, 4, 5)));
+    println(separateList(List(-3,-6,8,-9,13)))
+    println(connectLists(List(5,4,3,2), List(1,2,3,4,5,6)));
+  }
+
+  def i_list_size[A](list: List[A]): Int = {
+    if (list == Nil) 0 else {
+      1 + i_list_size(list.tail);
+    }
+  }
+
+  def getUjemnList(listStart: List[Int]): List[Int] = {
+    if (listStart == Nil) Nil else if (listStart.head < 0) {
+      listStart.head :: getUjemnList(listStart.tail)
+    } else {
+      getUjemnList(listStart.tail)
+    }
+  }
+
+  def getUjemnAndNieparzList(listStart: List[Int]): List[Int] = {
+    if (listStart == Nil) Nil else if (listStart.head < 0 && listStart.head % 2 == -1) {
+      listStart.head :: getUjemnAndNieparzList(listStart.tail)
+    } else {
+      getUjemnAndNieparzList(listStart.tail)
+    }
+  }
+  def separateList(list: List[Int]): (List[Int],List[Int]) = {
+    (getUjemnList(list), getUjemnAndNieparzList(list))
+  }
+  def connectLists(list1: List[Int], list2: List[Int]): List[Int] =
+  {
+    if (list1 == Nil && list2 == Nil)
+      {
+        Nil
+      }
+    else if (list1 != Nil && list2 != Nil)
+      {
+        List(list1.head, list2.head) ::: connectLists(list1.tail, list2.tail)
+      } else if (list1 == Nil && list2 != Nil)
+      {
+        List(list2.head) ::: connectLists(list1, list2.tail)
+      } else {
+      List(list1.head) ::: connectLists(list1.tail, list2)
+    }
+  }
+}
