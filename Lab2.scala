@@ -11,7 +11,8 @@ object Lab2 extends App {
       else if (Math.abs(list.head)>=1) list.head::splitInf(list.tail)
       else splitInf(list.tail)
     }
-    (splitClose(list),splitInf(list))
+    if(list==Nil) (Nil,Nil)
+    else (splitClose(list),splitInf(list))
   }
   //Zadanie 2
   def length(list:List[Double]):Int= {
