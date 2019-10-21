@@ -36,18 +36,3 @@ def concatLists (list1:List[Double], list2:List[Double]):List[Double] = {
 }
 
 concatLists(List(1,2,3), List(4,5,6,7,8))
-
-
-def divideList2 (list:List[Double]):(List[Double], List[Double]) = {
-  def inInterval (list:List[Double], pred:Int=>Boolean):List[Double] =
-    if (list.isEmpty) Nil
-    else if (pred(list.head))
-      list.head::inInterval(list.tail, pred)
-    else inInterval(list.tail, pred)
-
-  def pred (head:Double, bool:Boolean):Boolean = if ((list.head.toDouble >= 1 || list.head.toDouble <= -1) && bool) true else false
-
-  (inInterval(list, pred(_, true)), inInterval(list, pred(_, false)))
-}
-
-divideList2(List(-3, 0.4, -2, -1, 0, 1, 2, 0.1, 0.2, 0.3))
