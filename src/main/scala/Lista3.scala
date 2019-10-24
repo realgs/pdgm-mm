@@ -1,4 +1,4 @@
-object Lista2 {
+object Lista3 {
   def find(list1: List[String], patterns: List[String]): List[String] = {
     def matchPatterns(
         list: List[String],

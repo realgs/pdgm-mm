@@ -1,4 +1,4 @@
-object Lista1 {
+object Lista2 {
   def length(list: List[Any]): Int = {
     if (list.isEmpty) 0
     else 1 + length(list.tail)
