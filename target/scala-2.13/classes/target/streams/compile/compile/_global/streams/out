@@ -1,0 +1,4 @@
+[error] /Users/jedrzej/PPLaby/pdgm-mm/src/main/scala/Lista1.scala:30:9: not found: value licba
+[error]     if (licba < 10) 40
+[error]         ^
+[error] one error found
