@@ -17,30 +17,6 @@ def find(indexes:List[String], toFind:String):List[String]={
 
   findRec(indexes, toFind)
 }
-/*
-//-----------------------------------Zadanie 1 z N fraz, rekurencyjnie
-def findN(indexes:List[String], toFindList:List[String]):List[String]={
-
-  def compareStrings(x:String, comp:String):Boolean={
-    if(x.isEmpty&&comp.isEmpty)true
-    else if (x.isEmpty)false
-    else if (comp.isEmpty)true
-    else if(x.head == comp.head)compareStrings(x.tail, comp.tail)
-    else false
-  }
-
-  def findRec(indexes:List[String], toFind:String):List[String]={
-    if(indexes.isEmpty)Nil
-    else if(compareStrings(indexes.head, toFind))indexes.head::findRec(indexes.tail, toFind)
-    else findRec(indexes.tail, toFind)
-  }
-
-  def findHelper(toFindList:List[String], acc:List[String]):List[String]={
-    if(toFindList.isEmpty)acc
-    else findHelper(toFindList.tail, acc:::findRec(indexes, toFindList.head))
-  }
-  findHelper(toFindList, Nil)
-}*/
 
 //-----------------------------------Zadanie 1 z N fraz, rekurencyjnie
 def findN(indexes:List[String], totalFindList:List[String]):List[String]={
@@ -52,12 +28,6 @@ def findN(indexes:List[String], totalFindList:List[String]):List[String]={
     else if(x.head == comp.head)compareStrings(x.tail, comp.tail)
     else false
   }
-
-  /*def findRec(indexes:List[String], toFind:String):List[String]={
-    if(indexes.isEmpty)Nil
-    else if(compareStrings(indexes.head, toFind))indexes.head::findRec(indexes.tail, toFind)
-    else findRec(indexes.tail, toFind)
-  }*/
 
   val buffer : List[String] = Nil
   def findRec(indexes:List[String], findList:List[String]):List[String]={
