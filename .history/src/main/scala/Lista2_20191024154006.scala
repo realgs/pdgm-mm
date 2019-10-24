@@ -1,9 +1,0 @@
-object Lista2 {
-    def find(list:List[String], patterns :List[String]) : List[String] = {
-        (patterns,list) match {
-            case (Nil, _) 
-            case (ph::pt, h::t) => list.filter{word => word.contains(ph)}::find(list,pt)
-        }
-        list.distinct; 
-    }
-}
