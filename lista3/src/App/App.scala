@@ -13,18 +13,30 @@ class App {
     else false
   }
 
+  def contains(patterns : List[String], string : String) : Boolean = {
+    if (patterns == Nil) false
+    else if (contains(patterns.head, string)) true
+    else contains(patterns.tail, string)
+  }
+
   //zad1
-  def find(list : List[String], pattern : String) : List[String] = {
-    list.filter( element => contains(pattern,element))
+  def findListOfPatterns(list : List[String], pattern : List[String]) : List[String] = {
+    if (list == Nil) Nil
+    else if (contains(pattern,list.head)) list.head::findListOfPatterns(list.tail,pattern)
+    else findListOfPatterns(list.tail,pattern)
   }
 
   def find2(list : List[String], pattern : String) : List[String] = {
-    if (list == Nil) Nil
-    else if (contains(pattern,list.head)) list.head::find2(list.tail,pattern)
-    else find2(list.tail,pattern)
+    list.filter( element => contains(pattern,element))
   }
 
-  def find2Tail(list : List[String], pattern : String) : List[String] = {
+  def find(list : List[String], pattern : String) : List[String] = {
+    if (list == Nil) Nil
+    else if (contains(pattern,list.head)) list.head::find(list.tail,pattern)
+    else find(list.tail,pattern)
+  }
+
+  def findTail(list : List[String], pattern : String) : List[String] = {
     def find2Helper(list : List[String], pattern : String, result : List[String]) : List[String] = {
       if (list == Nil) result
       else if (contains(pattern,list.head)) find2Helper(list.tail,pattern, list.head::result)
