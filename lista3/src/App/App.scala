@@ -26,6 +26,15 @@ class App {
     else findListOfPatterns(list.tail,pattern)
   }
 
+  def findListOfPatternsTail(list : List[String], pattern : List[String]) : List[String] = {
+    def helper(list : List[String], pattern : List[String], result : List[String]) : List[String] = {
+      if (list == Nil) result
+      else if (contains(pattern,list.head)) helper(list.tail,pattern,list.head::result)
+      else helper(list.tail,pattern,result)
+    }
+    reverse(helper(list,pattern,List()))
+  }
+
   def find2(list : List[String], pattern : String) : List[String] = {
     list.filter( element => contains(pattern,element))
   }
