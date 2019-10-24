@@ -253,5 +253,6 @@ fabric.properties
 ### Scala ###
 *.class
 *.log
-
+.history/*
+target/*
 # End of https://www.gitignore.io/api/scala
