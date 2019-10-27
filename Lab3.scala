@@ -14,16 +14,24 @@ object Lab3 {
     //println(ifConsist(a,b))
 
   }
-  def ifConsist(that: String, inThat: String): Boolean =
+  def ifConsistHelp(that: String, inThat: String): Boolean =
   {
     (that, inThat) match {
-      case ("", "") => true
+      //case ("", "") => true
       case ("",_) => true
       case (_,"") => false
-      case (_,_) => if (that.head != inThat.head) if
-      else ifConsist(that.tail, inThat.tail)
+      case (_,_) => if (that.head != inThat.head) false
+      else ifConsistHelp(that.tail, inThat.tail)
       }
-    }
+  }
+  def ifConsist(that: String, inThat: String):Boolean = {
+     if (that == "") true
+     else if (inThat == "") false //that != ""
+     else{
+       ifConsistHelp(that, inThat) || ifConsist(that, inThat.tail)
+     }
+
+   }
   def find(list: List[String], elem: String): List[String] =
   {
     list match {
