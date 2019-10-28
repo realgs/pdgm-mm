@@ -1,4 +1,4 @@
-Nie wolno stosować funkcji bibliotecznych (np. "length", "reverse", "append") o złożoności większej, niż O(1).
+﻿Nie wolno stosować funkcji bibliotecznych (np. "length", "reverse", "append") o złożoności większej, niż O(1).
 Napisz funkcje przy użyciu rekurencji ogonowej i nieogonowej. Porównaj.
 
 1) Napisz funkcję wyszukującą po/w elementach listy wejściowej. Przyjmuje dwa argumenty wejściowe - lista, w której szukamy wartości. Drugi argument - element, którego szukamy. Zwracamy listę elementów, które zawierają w sobie lub są równe szukanej frazie. Dodatkowo, zaprojektuj funkcję tak, by przyjmowała N fraz wejściowych i zwracała wyniki, które zawierają którąkolwiek z fraz.
