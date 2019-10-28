@@ -4,12 +4,21 @@ object zad1a {
   def contains (current:String, patterns:List[String]):Boolean = {
   	//@tailrec
   	def contains_helper (current:String, currentPattern:String):Boolean = {
-  		(current, currentPattern) match {
-  			case (_, "") => true
-  			case ("", _) => false
+  		def contains_offset (current_h:String, pattern_h:String):Boolean = {
+  			(current_h, pattern_h) match {
+  				case (_, "") => true
+  				case ("", _) => false
+  				case _ =>
+  					if (current_h.head == pattern_h.head)
+  						contains_helper(current_h.tail, pattern_h.tail)
+  					else false
+  			}
+  		}
+  		(current) match {
+  			case ("") => false
   			case _ =>
-  				if (current.head == currentPattern.head) contains_helper(current.tail, currentPattern.tail)
-  				else false
+  				if (contains_offset(current, currentPattern)) true
+  				else contains_offset(current.tail, currentPattern)
   		}
   	}
 
@@ -38,7 +47,7 @@ object zad1a {
                                                   //| 
 	
 	
-  find(List("index0169", "index0168202", "index0168211", "index0168210", "index0169222", "index0169224"), List("index0168", "index0169224"), 1)
+  find(List("index0169", "index0169224", "index0168202", "oindex0168211", "index0168210", "index0169222"), List("index0168", "index0169224"), 3)
                                                   //> res0: List[String] = List(index0168202, index0168211, index0168210)
   
   
