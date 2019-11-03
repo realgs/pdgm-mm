@@ -19,8 +19,8 @@ object zad1 {
   			case _ =>
   				if (contains_offset(current, currentPattern)) true
   				else contains_offset(current.tail, currentPattern)
-		}
-  }
+			}
+	  }
 
  		(patterns) match {
  			case (Nil) => false
