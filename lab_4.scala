@@ -40,7 +40,7 @@ def convert(number: Int, system: Int) : List[Int] =
         if(number < system) number::results
         else convert_results(number / system, system, (number % system)::results)
 
-    if(number >= 0) convert_results(number, abs(system), List(1))
-    else convert_results(-number, abs(system), List(-1))
+    if(number >= 0) 1::convert_results(number, abs(system), List())
+    else -1::convert_results(-number, abs(system), List())
 }
-convert(259, 16)
+convert(-259, 16)
