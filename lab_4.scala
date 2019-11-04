@@ -33,12 +33,14 @@ def filter [A] (list: List[List[A]], phrase: A) : List[List[A]] =
 filter(List(List(1, 2, 3), List(2, 4), List(5, 6)), 6)
 
 // 2
-def convert(x: Int, system: Int) : List[Int] =
+def convert(number: Int, system: Int) : List[Int] =
 {
-    def convert_results(x: Int, system: Int, results: List[Int]) : List[Int] =
-        if(x < system) x::results
-        else convert_results(x / system, system, (x % system)::results)
+    def abs (x: Int) = if(x < 0) -x else x
+    def convert_results(number: Int, system: Int, results: List[Int]) : List[Int] =
+        if(number < system) number::results
+        else convert_results(number / system, system, (number % system)::results)
 
-    convert_results(x, system, Nil)
+    if(number >= 0) convert_results(number, abs(system), List(1))
+    else convert_results(-number, abs(system), List(-1))
 }
 convert(259, 16)
