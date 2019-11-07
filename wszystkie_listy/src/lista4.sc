@@ -5,8 +5,7 @@ val myList2 = List(-5, -3, -7)
 val myList3 = List()
 val myList4 = List(4, -2)
 val myList5 = List(-2)
-val myList6 = List(5.0, 2.0)
-val myList7 = List("  ", "")
+
 
 
 def filter [A] (list: List[List[A]], filterPhrase: A): List[List[A]] =
@@ -24,12 +23,12 @@ filter(List(List(1,2,3), List(2,4), List(5,6)), Nil)
 def convertToHex(number: Int):List[Int]={
 
   @tailrec
-  def convertToHexHelper(n: Int, res: List[Int]):List[Int]={
-    if (n == 0) res
-    else convertToHexHelper(n / 16, n % 16 :: res)
+  def convertToHexHelper(numberHelper: Int, res: List[Int]):List[Int]={
+    if (numberHelper == 0) res
+    else convertToHexHelper(numberHelper / 16, numberHelper % 16 :: res)
   }
 
-  if(number == 0) List(0)
+  if(number == 0) Nil
   else if(number > 0) convertToHexHelper(number, List())
 
   else {
@@ -47,15 +46,15 @@ convertToHex(-254)
 def convertToBase(number: Int, base: Int):List[Int]={
 
 @tailrec
-  def convertHelper(n: Int, b: Int, res: List[Int]):List[Int]={
-    if(n==0) res
-    else convertHelper(n / b, b, n % b :: res)
+  def convertHelper(numberHelper: Int, baseHelper: Int, res: List[Int]):List[Int]={
+    if(numberHelper==0) res
+    else convertHelper(numberHelper / baseHelper, baseHelper, numberHelper % baseHelper :: res)
   }
   if(base>1){
-    if(number==0) List(0)
+    if(number==0) Nil
     else if(number>0) convertHelper(number,base,List())
 
-    else {
+    else  {
       val result=convertHelper(Math.abs(number),base,List())
       (-1)*result.head::result.tail
     }
@@ -65,7 +64,7 @@ def convertToBase(number: Int, base: Int):List[Int]={
 
 
 convertToBase(31,16)
-convertToBase(31,8)
+convertToBase(-31,8)
 convertToBase(31,4)
 convertToBase(31,2)
 convertToBase(0,20)
