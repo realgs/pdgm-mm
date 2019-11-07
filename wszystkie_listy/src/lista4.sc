@@ -28,13 +28,11 @@ def convertToHex(number: Int):List[Int]={
     else convertToHexHelper(numberHelper / 16, numberHelper % 16 :: res)
   }
 
-  if(number == 0) Nil
-  else if(number > 0) convertToHexHelper(number, List())
+  if(number == 0) List(1)
+  else if(number > 0) 1::convertToHexHelper(number, List())
 
-  else {
-    val result=convertToHexHelper(Math.abs(number), List())
-    (-1)*result.head::result.tail
-  }
+  else -1::convertToHexHelper(Math.abs(number), List())
+
 }
 
 convertToHex(31)
@@ -51,15 +49,12 @@ def convertToBase(number: Int, base: Int):List[Int]={
     else convertHelper(numberHelper / baseHelper, baseHelper, numberHelper % baseHelper :: res)
   }
   if(base>1){
-    if(number==0) Nil
-    else if(number>0) convertHelper(number,base,List())
+    if(number==0) List(1)
+    else if(number>0) 1::convertHelper(number, base, List())
 
-    else  {
-      val result=convertHelper(Math.abs(number),base,List())
-      (-1)*result.head::result.tail
-    }
+    else -1::convertHelper(Math.abs(number), base, List())
   }
-  else throw new Exception("baza musi być większa niż 1")
+  else throw new Exception("podstawa liczby musi być większa niż 1")
 }
 
 
@@ -68,8 +63,8 @@ convertToBase(-31,8)
 convertToBase(31,4)
 convertToBase(31,2)
 convertToBase(0,20)
-convertToBase(312312,14)
-convertToBase(312312, 27)
+convertToBase(232193,14)
+convertToBase(232193, 17)
 convertToBase(-31,4)
 
 convertToBase(31,0)

@@ -10,17 +10,7 @@ val myList7 = List("  ", "")
 
 
 
-
-
-
-
-
-
-
-
-
-
-//*zadanie 2*//
+//zadanie 2
 
 
 def merge[A](list1: List[A],list2: List[A] ,list3: List[A]): List[A]={
