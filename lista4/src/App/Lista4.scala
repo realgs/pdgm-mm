@@ -16,15 +16,17 @@ class Lista4 {
       if (result == 0) rest::acc
       else decToHexHelper(result,rest::acc)
     }
-    decToHexHelper(number, List())
+    if (number >= 0) 1::decToHexHelper(number, List())
+    else -1::decToHexHelper(-number, List())
   }
   def decToAny(number : Int, convertTo : Int) : List[Int] = {
-    def decToHexHelper(number : Int, acc : List[Int]) : List[Int] = {
+    def decToAnyHelper(number : Int, acc : List[Int]) : List[Int] = {
       val result = number / convertTo
       val rest = number % convertTo
       if (result == 0) rest::acc
-      else decToHexHelper(result,rest::acc)
+      else decToAnyHelper(result,rest::acc)
     }
-    decToHexHelper(number, List())
+    if (number >= 0) 1::decToAnyHelper(number, List())
+    else -1::decToAnyHelper(-number, List())
   }
 }
