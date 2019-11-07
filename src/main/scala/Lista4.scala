@@ -19,8 +19,8 @@ object Lista4 {
             if (decimalHelp < system) decimalHelp::result
             else helper(decimalHelp / system, (decimalHelp-((decimalHelp%system))::result))
         }
-        helper(decimal, Nil)
-        
+        if (decimal < 0) helper(Math.abs(decimal), List(-1))
+        else helper(decimal,Nil)
     }
 
 }
