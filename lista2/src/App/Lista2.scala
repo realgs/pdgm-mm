@@ -3,11 +3,11 @@ package App
 class Test1 {
 
   def reverse [A](list : List[A]) : List[A] = {
-    def reverseIn (list : List[A], toReturn : List[A]) : List[A] = {
+    def reverseHelper (list : List[A], toReturn : List[A]) : List[A] = {
       if (list == Nil) toReturn
-      else reverseIn(list.tail, list.head::toReturn)
+      else reverseHelper(list.tail, list.head::toReturn)
     }
-    reverseIn(list,List())
+    reverseHelper(list,List())
   }
 
   def divide (list : List[Int]) : (List[Int], List[Int]) = {
@@ -32,8 +32,17 @@ class Test1 {
   }
 
   def merge[A] (list1 : List[A], list2 : List[A]) : List[A] = {
+    def mergeIn[A](list1 : List[A], list2 : List[A], result : List[A]) : List[A] = {//mergeHelper nazwać!!!
+      if (list1 != Nil && list2 != Nil) mergeIn(list1.tail,list2.tail, list2.head::list1.head::result)
+      else if (list1 != Nil) list1:::result
+      else list2:::result
+    }
+    reverse(mergeIn(list1,list2, List()))
+    /*
     if (list1 != Nil && list2 != Nil) list1.head::list2.head::merge(list1.tail,list2.tail)
     else if (list1 != Nil) list1
     else list2
+    rekursja zwykla
+    */
   }
 }
