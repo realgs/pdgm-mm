@@ -13,14 +13,14 @@ def listLength[A](list: List[A]): Int =
   else 1 + listLength(list.tail)
 
 
-listLength(myList);
-listLength(myList2);
-listLength(myList3);
-listLength(myList4);
-listLength(myList5);
+listLength(myList)
+listLength(myList2)
+listLength(myList3)
+listLength(myList4)
+listLength(myList5)
 
-listLength(myList6);
-listLength(myList7);
+listLength(myList6)
+listLength(myList7)
 
 
 
@@ -38,7 +38,5 @@ def JoinTwoLists[A](list: List[A], list2: List[A]): List[A] =
 
 
 
-//JoinTwoLists(myList, myList2);
 JoinTwoLists(List(1), List(1, 2, 3))
 
-//JoinTwoLists(myList3, myList4);
