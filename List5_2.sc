@@ -5,7 +5,7 @@ case class Node[+A](elem:Int, left:BT[A], right:BT[A]) extends BT[A]
 import scala.math.pow
 
 //Zadanie 1
-def createTree2[A](depth : Int) : BT[Int] = {
+def createTree[A](depth : Int) : BT[Int] = {
 
   def randomTree2(nodeCount : Int) : BT[Int]= {
     if(nodeCount == 1) Node(util.Random.nextInt(5)+1, Empty, Empty)
@@ -18,7 +18,7 @@ def createTree2[A](depth : Int) : BT[Int] = {
   randomTree2(pow(2,depth).toInt - 1)
 }
 
-val tt = createTree2(4)
+val tt = createTree(4)
 
 
 // BFS wypisujący drzewo
@@ -37,7 +37,7 @@ breadthBT(tt)
 
 //zadanie 2
 
-def iloczyn[A](tree : BT[A]) : Int = {
+def product_of_nodes[A](tree : BT[A]) : Int = {
 
   def helper[A](nodeQueue: List[BT[A]]) : Int = nodeQueue match {
     case Nil => 1
@@ -47,7 +47,7 @@ def iloczyn[A](tree : BT[A]) : Int = {
   helper(List(tree))
 }
 
-iloczyn(tt)
+product_of_nodes(tt)
 
 
 // zadanie 3
