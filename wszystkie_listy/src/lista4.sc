@@ -44,15 +44,16 @@ convertToHex(-254)
 def convertToBase(number: Int, base: Int):List[Int]={
 
 @tailrec
-  def convertHelper(numberHelper: Int, baseHelper: Int, res: List[Int]):List[Int]={
-    if(numberHelper==0) res
-    else convertHelper(numberHelper / baseHelper, baseHelper, numberHelper % baseHelper :: res)
+  def convertHelper(numberHelper: Int, res: List[Int]):List[Int]={
+    if(numberHelper == 0) res
+    else convertHelper(numberHelper / base, numberHelper % base :: res)
   }
   if(base>1){
-    if(number==0) List(1)
-    else if(number>0) 1::convertHelper(number, base, List())
 
-    else -1::convertHelper(Math.abs(number), base, List())
+    if(number==0) List(1)
+    else if(number>0) 1::convertHelper(number, List())
+    else -1::convertHelper(-number, List())
+
   }
   else throw new Exception("podstawa liczby musi być większa niż 1")
 }

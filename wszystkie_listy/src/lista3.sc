@@ -26,6 +26,7 @@ merge(myList,myList2,myList4)
 merge(myList, myList3, myList5)
 
 def mergeRec[A](list1: List[A], list2: List[A], list3: List[A]): List[A]={
+
   @tailrec
   def mergeHelper(list1: List[A], list2: List[A], list3: List[A], listAcc: List[A]): List[A]={
     (list1, list2, list3) match {
