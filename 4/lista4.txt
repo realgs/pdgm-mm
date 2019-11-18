@@ -1,0 +1,19 @@
+Wolno używać funkcji bibliotecznych o złożoności większej, niż O(1) takich jak reverse, foldleft, map, filter... Użyj rekurencji ogonowej gdzie to możliwe.
+
+1) Zdefiniuj funkcję filtrującą. Przyjmuje dwa parametry: listę list i frazę filtrującą. W liście wynikowej pozostać mają tylko te elementy, które zawierają lub są równe podanej wartości. Zadbaj o złożoność obliczeniową i pamięciową.
+
+   Przykład: [[1;2;3];[2;4];[5;6]] 6 -> [[5;6]]
+
+
+   Punkty: 5
+
+2) Zdefiniuj funkcję przekształcającą liczbę dziesiętną w listę cyfr szesnastkowych.
+   Funkcja ma mieć jeden parametr. Zadbaj o złożoność obliczeniową i pamięciową.
+
+   Przykład: 31 -> [1;15]
+
+Dwa kolejne punkty uzyskasz przygotowując program do przekształcenia liczby do dowolnego systemu (binarny, szesnastkowy itp).
+
+   Przykład: [31, 16] -> [1;15]
+
+   Punkty: 3 + 2
