@@ -1,6 +1,5 @@
 import scala.annotation.tailrec
 
-
 def filt[A](list: List[List[A]], element:A)= {
   if(element == Nil ) list
   @tailrec
@@ -53,15 +52,3 @@ def convert(x:Int,n:Int) = {
 
 convert(2545,16)
 convert(87,2)
-
-/*
-def convert(x:Int,n:Int) =
-{
-  def convertTail(x:Int, acc:List[Int]):List[Int] =
-  {
-    if(x == 0) acc
-    else convertTail(x/n, (x%n) :: acc)
-  }
-  convertTail(x,List())
-}
- */
