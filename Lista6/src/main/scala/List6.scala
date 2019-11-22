@@ -2,12 +2,15 @@ object List6 extends App {
   //ZADANIE1
   def eachNElement[A](list: LazyList[A], n: Int, lastElem: Int): LazyList[A] = {
     def helper(counter: Int, list: LazyList[A]): LazyList[A] = {
-      if (counter > lastElem - 1) LazyList()
+      if (counter > lastElem - 1 || list==LazyList()) LazyList()
       else if (counter % n == 0) list.head #:: helper(counter + 1, list.tail)
       else helper(counter + 1, list.tail)
     }
 
-    helper(0, list)
+    if (n >= 1 && lastElem > 0)
+      helper(0, list)
+    else
+      LazyList()
   }
 
   val list = LazyList(5, 6, 3, 2, 1)
@@ -15,12 +18,11 @@ object List6 extends App {
   println(eachNElement(list, 2, 4).toList)
 
   //ZADANIE2
-  def ldzialanie(listOne:LazyList[Int], listTwo:LazyList[Int],operator: Char):LazyList[Int]={
-    (listOne,listTwo) match{
-      case (LazyList(),LazyList())=> LazyList()
-      case (LazyList(),_)=> listTwo
-      case (_,LazyList())=> listOne
-      case (_,_)=> {
+  def ldzialanie(listOne: LazyList[Int], listTwo: LazyList[Int], operator: Char): LazyList[Int] = {
+    (listOne, listTwo) match {
+      case (LazyList(), _) => listTwo
+      case (_, LazyList()) => listOne
+      case (_, _) => {
         if (operator == '+') (listOne.head + listTwo.head) #:: ldzialanie(listOne.tail, listTwo.tail, operator)
         else if (operator == '-') (listOne.head - listTwo.head) #:: ldzialanie(listOne.tail, listTwo.tail, operator)
         else if (operator == '*') (listOne.head * listTwo.head) #:: ldzialanie(listOne.tail, listTwo.tail, operator)
@@ -30,11 +32,11 @@ object List6 extends App {
     }
   }
 
-  val list1 = LazyList(1,2,3)
-  val list2 = LazyList(2,3,4,5)
-  println(ldzialanie(list1,list2,'+').toList)
-  println(ldzialanie(list1,list2,'-').toList)
-  println(ldzialanie(list1,list2,'*').toList)
-  println(ldzialanie(list1,list2,'/').toList)
+  val list1 = LazyList(1, 2, 3)
+  val list2 = LazyList(2, 3, 4, 5)
+  println(ldzialanie(list1, list2, '+').toList)
+  println(ldzialanie(list1, list2, '-').toList)
+  println(ldzialanie(list1, list2, '*').toList)
+  println(ldzialanie(list1, list2, '/').toList)
 
 }
