@@ -15,9 +15,10 @@ def preorder[A](bt:BT[A]):List[A] = bt match {
 def generateTreeDepth(depth: Int, numberRange: Int):BT[Int]={
   val generator=new Random()
   //funkcja generujaca liczbe z zakresu -n do n
-  def generateRandomNumber(n: Int)=(-1)*n+generator.nextInt((2*n)+1)
+  //def generateRandomNumber(n: Int)=(-1)*n+generator.nextInt((2*n)+1)
+
   //funkcja generujaca liczbe z zakresu -n do n bez 0
-  def generateRandomNumberWithout0(n: Int)={
+  def generateRandomNumber(n: Int)={
     val result=1+generator.nextInt(n)
     if(generator.nextInt(2)==0) result*(-1)
     else result
@@ -27,11 +28,11 @@ def generateTreeDepth(depth: Int, numberRange: Int):BT[Int]={
     if(d==0) Node(generateRandomNumber(numberRange),Empty,Empty)
     else Node(generateRandomNumber(numberRange),generateTree(d-1),generateTree(d-1))
   }
-  if(depth>=0 && numberRange>=0) generateTree(depth)
+  if(depth>=0 && numberRange>0) generateTree(depth)
   else Empty
 }
 
-val tree1=generateTreeDepth(2,10)
+val tree1=generateTreeDepth(2,6)
 preorder(tree1)
 val tree2=generateTreeDepth(3,10)
 preorder(tree2)
@@ -54,5 +55,52 @@ def productOfTree(tree: BT[Int]): Int={
 
 productOfTree(tree1)
 
+def listContains[A](li: List[A], el: A): Boolean={
+  if(li==Nil) false
+  else if (li.head == el) true
+  else listContains(li.tail,el)
+}
 
+def breadthWithoutDuplicatesv2(t:BT[Int]):List[Int]={
+  def helper(queue:List[BT[Int]],visited: List[Int]): List[Int] ={
+    queue match {
+      case Nil=>Nil
+      case Empty::t=> helper(t,visited)
+      case Node(v,l,r)::t=>{
+        if(listContains(visited,v)) {
+          (0)::helper(t:::(l::r::Nil),visited)
+        }
+        else v::helper(t:::(l::r::Nil),v::visited)
+      }
+    }
+  }
+  if(t!=Empty) helper(List(t),List())
+  else Nil
+}
+
+breadthWithoutDuplicatesv2(tree1)
+
+def depthWithoutDuplicatesv2(t: BT[Int]): List[Int]={
+  def helper(bt:BT[Int],visited: List[Int]):(List[Int],List[Int])={
+    bt match {
+      case Empty=>(Nil,visited)
+      case Node(v,l,r)=>{
+        if(listContains(visited,v)){
+          val left=helper(l,visited)
+          val right=helper(r,left._2)
+          (0::left._1:::right._1,right._2)
+        }
+        else{
+          val left=helper(l,v::visited)
+          val right=helper(r,left._2)
+          (v::left._1:::right._1,right._2)
+        }
+      }
+    }
+  }
+  if(t!=Empty) helper(t,List())._1
+  else Nil
+}
+
+depthWithoutDuplicatesv2(tree1)
 
