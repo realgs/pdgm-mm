@@ -52,7 +52,7 @@ def isDuplicate [A](bt:BT[A], query:BT[A], walk:(List[BT[A]], List[BT[A]]) => Li
         if (head eq query) false
         else {
           val Node(value, lTree, rTree) = head
-          val Node(queryValue, queryLTree, queryRTree) = query
+          val Node(queryValue, _, _) = query
           if (value == queryValue) true
           else helper(walk(tail, List(lTree, rTree)))
         }
@@ -98,7 +98,7 @@ def isDuplicate [A](bt:BT[A], query:BT[A], walk:TreeWalk[A]):Boolean = {
         if (head eq query) false
         else {
           val Node(value, lTree, rTree) = head
-          val Node(queryValue, queryLTree, queryRTree) = query
+          val Node(queryValue, _, _) = query
           if (value == queryValue) true
           else helper(walk.move(tail, List(lTree, rTree)))
         }
