@@ -1,0 +1,12 @@
+W zadaniach użyj dogodnej reprezentacji kolekcji i uzasadnij swój wybór. Tablice nie są optymalnym wyborem, można je potraktować jako absolutne minimum.
+
+1) Napisz funkcję powielającą elementy w kolekcji na podstawie drugiej kolekcji
+   określającej ile razy elementy mają być powielone.
+
+   przykład: duplicate [1;2;3] oraz [0;3;1;4] daje wynik [2;2;2;3]
+
+   Punkty: 5
+
+2) Przepisz funkcję z zadania pierwszego tak, by pierwszy zbiór wejściowy nie mógł przyjmować duplikatów.
+
+   Punkty: 5 
