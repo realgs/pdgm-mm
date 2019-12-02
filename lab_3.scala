@@ -1,22 +1,22 @@
 Lista 3 nie zmienia się od czwartku znacząco. Jedyna zmiana dotyczy zadania 1- z wyszukiwaniem. Wasza funkcja wyszukująca ma dodatkowo przyjmować parametr Total(int), mówiący ile maksymalnie wyników funkcja szukająca ma zwrócić. Link do repozytorium ten sam co wcześniej. https://github.com/realgs/pdgm-mm
 parametr typu unit -> ewaluacja leniwa (ogona)
-w Haskellu wszystko jest leniwe. nawet programiśći.
+w Haskellu wszystko jest leniwe. nawet programiści.
 
 // 1 without total
 def find(entry_list : List[String], words : List[String]) : List[String] =
 {
     def match_word(entry : String, words : List[String]) : List[String] =
-        if(|| words == Nil) Nil
+        if(words == Nil) Nil
         else if(entry.contains(words.head)) List(entry)
         else match_word(entry, words.tail)
 
-    if(total == 0 || entry_list == Nil || words == Nil) Nil
-    else match_word(entry_list.head, words, total):::find(entry_list.tail, words)
+    if(entry_list == Nil || words == Nil) Nil
+    else match_word(entry_list.head, words):::find(entry_list.tail, words)
 }
 find(List("aha1", "ahaha", "aha123", "aha"), List("aha1"), 2)
 
 // 1 tail rec
-def find(entry_list : List[String], words : List[String], result : List[String], total : Int) : List[String] =
+def find(entry_list : List[String], words : List[String], result : List[String]) : List[String] =
 {
     def match_word(entry : String, words : List[String]) : List[String] =
         if(words == Nil) Nil
