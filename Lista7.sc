@@ -24,7 +24,8 @@ duplicate(List(), List(0,3,1,4))
 duplicate(List(1,2,3), List())
 duplicate(List(1,2,3,3), List(0,3,1,4))
 
-def duplicateCheckInputForDuplicates[A](toDuplicate:List[A], repetitions:List[Int]):List[A]={
+def duplicateWithCheck[A](toDuplicate:List[A], repetitions:List[Int]):List[A]={
+
   @scala.annotation.tailrec
   def containsDuplicates(toDuplicate:List[A], values:ListBuffer[A]):Boolean=
     if(toDuplicate.isEmpty)false
@@ -35,8 +36,8 @@ def duplicateCheckInputForDuplicates[A](toDuplicate:List[A], repetitions:List[In
   else duplicate(toDuplicate, repetitions)
 }
 
-duplicateCheckInputForDuplicates(List(1,2,3), List(0,3,1,4))
-duplicateCheckInputForDuplicates(List("A", "B", "C", "D", "E", "F", "G"), List(0,3,1,4))
-duplicateCheckInputForDuplicates(List(), List(0,3,1,4))
-duplicateCheckInputForDuplicates(List(1,2,3), List())
-duplicateCheckInputForDuplicates(List(1,2,3,3), List(0,3,1,4))
+duplicateWithCheck(List(1,2,3), List(0,3,1,4))
+duplicateWithCheck(List("A", "B", "C", "D", "E", "F", "G"), List(0,3,1,4))
+duplicateWithCheck(List(), List(0,3,1,4))
+duplicateWithCheck(List(1,2,3), List())
+duplicateWithCheck(List(1,2,3,3), List(0,3,1,4))
