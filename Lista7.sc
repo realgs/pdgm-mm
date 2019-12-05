@@ -26,18 +26,23 @@ duplicate(List(1,2,3,3), List(0,3,1,4))
 
 def duplicateWithCheck[A](toDuplicate:List[A], repetitions:List[Int]):List[A]={
 
+  if(toDuplicate.length>repetitions.length)throw new IllegalArgumentException("Zbior elementow nie moze byc dluzszy!");
   @scala.annotation.tailrec
-  def containsDuplicates(toDuplicate:List[A], values:ListBuffer[A]):Boolean=
-    if(toDuplicate.isEmpty)false
-    else if(values.contains(toDuplicate.head)) true
-    else containsDuplicates(toDuplicate.tail, values+=toDuplicate.head)
+  def duplicator(reps:Int, elem:A, acc:ListBuffer[A]):ListBuffer[A]=
+    if(reps==0)acc
+    else duplicator(reps-1, elem, acc+=elem)
 
-  if(containsDuplicates(toDuplicate, ListBuffer.empty)) throw new IllegalArgumentException("Lista wejsciowa zawiera duplikaty!")
-  else duplicate(toDuplicate, repetitions)
+  @scala.annotation.tailrec
+  def helper(currentToDuplicate:Set[A], currentRepetitions:List[Int], acc:ListBuffer[A]):ListBuffer[A]=
+    if(currentToDuplicate.isEmpty) acc
+    else if (currentRepetitions.isEmpty) acc
+    else helper(currentToDuplicate.tail, currentRepetitions.tail, acc++duplicator(currentRepetitions.head, currentToDuplicate.head, ListBuffer.empty))
+
+  helper(toDuplicate.toSet,repetitions, ListBuffer()).toList
 }
 
 duplicateWithCheck(List(1,2,3), List(0,3,1,4))
-duplicateWithCheck(List("A", "B", "C", "D", "E", "F", "G"), List(0,3,1,4))
+duplicateWithCheck(List("A", "B", "C", "D"), List(0,3,1,4))
 duplicateWithCheck(List(), List(0,3,1,4))
 duplicateWithCheck(List(1,2,3), List())
 duplicateWithCheck(List(1,2,3,3), List(0,3,1,4))
