@@ -1,15 +1,18 @@
 
 import scala.math.abs
-val lista1 = List (1,2,3,3,3,7)
-val lista2 = List (1,2,3,-2, 1)
-val lista3 = List ("ala", "nie", "ma", "kota")
+import scala.collection.mutable.HashSet
+val lista1 = HashSet (1,2,3,3,7)
+val lista2 = List (1,2,3,1,4)
+val lista3 = HashSet ("ala", "nie", "ma", "kota")
 
-def multiplySetElems [A](listToMulti : List[A], listWithCoefficient : List[Int]) : List[A] = {
 
-  def multiplySetElemsHelper [A](listToMulti : Set[A], listWithCoefficient : List[Int]) : List[A] = {
+def multiplySetElems [A](listToMulti : HashSet[A], listWithCoefficient : List[Int]) : List[A] = {
+
+  def multiplySetElemsHelper [A](listToMulti : HashSet[A], listWithCoefficient : List[Int]) : List[A] = {
     if (listToMulti.isEmpty)Nil
     else if (listWithCoefficient.size == 0) listToMulti.toList // lub Nil, ale nie dane było w przykladzie jak to rozstrzygnac
           else {
+            if (listWithCoefficient.head < 0) throw new Exception ("reps < 0!")
             multiplyElem(listToMulti.head, abs(listWithCoefficient.head)) ++ multiplySetElemsHelper(listToMulti.tail, listWithCoefficient.tail)// co w przypadku wartosci ujemnej w drugiej z list?
           }
     }
@@ -24,7 +27,9 @@ def multiplySetElems [A](listToMulti : List[A], listWithCoefficient : List[Int])
     }
     multiplyElemHelper(elem, reps)
   }
-  multiplySetElemsHelper(listToMulti.toSet, listWithCoefficient)
+
+  if (listToMulti.size < listWithCoefficient.size) throw new Exception ("lists sizes are not eq!")
+  multiplySetElemsHelper(listToMulti, listWithCoefficient)
   }
 
 
