@@ -13,7 +13,7 @@ trait Debug { //https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Fiel
     val accum = ArrayBuffer.empty[String]
     for(field <- this.getClass().getDeclaredFields()){
       field.setAccessible(true) //Bez tego IllegalAccessException przy field.get(this)
-      accum+=("Pole: "+field.getName()+" => "+field.getType().toString()+", "+field.get(this))
+      accum+=(field.getName()+" => "+field.getType().toString()+", "+field.get(this))
     }
     accum.toArray
   }
