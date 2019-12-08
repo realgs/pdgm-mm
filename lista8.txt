@@ -1,0 +1,45 @@
+Lista przydatnych metod:
+
+- getClass
+- getDeclaredFields
+- setAccessible
+- getName
+- get
+
+1) Napisz cechę (trait) "Debug" z metodą "debugName", która wyświetli w konsoli nazwę klasy,
+   do której cecha została dołączona.
+
+Przykładowo:
+
+class Point(xv: Int, yv: Int) extends Debug {
+    var x: Int = xv
+    var y: Int = yv
+    var a: String = "test"
+}
+
+var p : Point = new Point(3,4);
+p.debugName();
+
+Wyświetli napis:
+
+Klasa: Point
+
+Punkty: 2
+
+2) Napisz cechę (trait) "Debug" z metodą "debugVars", która wyświetli w konsoli,
+   listę nazw, typów pól, wartości pól, do której cecha została dołączona.
+
+var p : Point = new Point(3,4);
+p.debugVars();
+
+Wyświetli napis:
+
+Pole: x => int, 3
+Pole: y => int, 4
+Pole: a => java.lang.String, test
+
+Punkty: 5
+
+3) Zmodyfikuj zadania 1 i 2 tak, by dane przez nie zwracane były rzeczywiście zwracane, a nie jedynie wypisywane w konsoli. Strukturę zwracanych danych oraz nazwy funkcji dobieraj sensownie- tak, by mówiły co robią, co przechowują, co reprezentują. Chcemy na wyjściu uzyskać wszystkie informacje, które wcześniej były jedynie printowane.
+
+Punkty: 3
