@@ -1,15 +1,15 @@
 def eachNElement(lazyList: Stream[Int], n:Int, m:Int): Stream[Int] =
 {
-  def helper(lazyList: Stream[Int], count:Int, remains:Int): Stream[Int] = (lazyList, count, remains) match
+  def helperEachNElement(lazyList: Stream[Int], count:Int, remains:Int): Stream[Int] = (lazyList, count, remains) match
   {
     case(_,_,0) => Stream.Empty
     case(Stream.Empty, _, _) => Stream.Empty
-    case(head #:: tail, 1, remains) => head#::helper(tail,n,remains - 1)
-    case(_#::tail, _, _) => helper(tail, count - 1, remains - 1)
+    case(head #:: tail, 1, remains) => head#::helperEachNElement(tail,n,remains - 1)
+    case(_#::tail, _, _) => helperEachNElement(tail, count - 1, remains - 1)
   }
 
-  if(m < 0 || n < 0) throw new Exception("Error, wrong function arguments!");
-  else helper(lazyList, 1, m)
+  if(m < 0 || n <= 0) throw new Exception("Error, wrong function arguments!");
+  else helperEachNElement(lazyList, 1, m)
 }
 
 val lazyList = Stream(5, 6, 3, 2, 1)
