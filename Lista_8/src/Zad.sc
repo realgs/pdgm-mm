@@ -12,27 +12,18 @@ trait Debug
   }
 
   def debugVars(): Any = {
-    def listOfFieldsToString(listOfFields: Array[Field]): List[String] =
+    def listOfFieldsToList(listOfFields: Array[Field]): List[(String, String, AnyRef)] =
     {
       if(listOfFields.isEmpty) Nil
       else
         {
           listOfFields.head.setAccessible(true)
-          val string = "Pole: " + listOfFields.head.getName() + " => " +listOfFields.head.getGenericType() + ", " + listOfFields.head.get(this)
-          string :: listOfFieldsToString(listOfFields.tail)
+          ((listOfFields.head.getName().toString(), listOfFields.head.getGenericType().toString(), listOfFields.head.get(this))) :: listOfFieldsToList(listOfFields.tail)
         }
     }
-
-    def listOfStringToSingleString(listOfStrings: List[String]): String =
-      {
-        if(listOfStrings.isEmpty) ""
-        else listOfStrings.head + "\n" + listOfStringToSingleString(listOfStrings.tail);
-      }
-
     val listOfFields = this.getClass().getDeclaredFields()
-    val stringListOfFields = listOfFieldsToString(listOfFields)
 
-    listOfStringToSingleString(stringListOfFields)
+    listOfFieldsToList(listOfFields)
   }
 }
 
