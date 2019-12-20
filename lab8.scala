@@ -20,7 +20,16 @@ trait Debug {
     declaredFields.foreach(el => {el.setAccessible(true); bOfElem += "Field: " + el.getName + " => " + el.getType + ", " + el.get(this)})
     bOfElem.toArray;
   }
+
+  def getArrayOfClassElementsDeveloped():Array[(String, Class[_], AnyRef)] =
+  {
+    var bOfElem = ArrayBuffer.empty[(String, Class[_], AnyRef)];
+    var declaredFields = getClass.getDeclaredFields
+    declaredFields.foreach(el => {el.setAccessible(true); bOfElem += ((el.getName, el.getType, el.get(this)))})
+    bOfElem.toArray;
+  }
 }
+
 
 class Point(xv: Int, yv: Int) extends Debug {
   var x: Int = xv
@@ -34,6 +43,8 @@ object Main {
     p1.debugVars()
     val a = p1.getArrayOfClassElements();
     println("-------------------");
-    a.foreach(println)
+    val v = p1.getArrayOfClassElementsDeveloped();
+    val t = 7;
+
   }
 }
