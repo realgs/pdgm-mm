@@ -1,4 +1,4 @@
-Nie wolno stosować funkcji bibliotecznych (np. "length", "reverse", "append") o złożoności większej, niż O(1). W przypadku, gdy zachodzi konieczność ich użycia należy przygotować własną implementację.
+﻿Nie wolno stosować funkcji bibliotecznych (np. "length", "reverse", "append") o złożoności większej, niż O(1). W przypadku, gdy zachodzi konieczność ich użycia należy przygotować własną implementację.
 
 Implementacja Scala/Ocaml - wybrany język, wskazuje prowadzący.
 

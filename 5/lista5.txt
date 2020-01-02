@@ -1,0 +1,8 @@
+1) Napisz funkcję generującą drzewo o głębokości N (liczba poziomów drzewa), zawierającą losowe liczby całkowite. Drzewo pełne.
+   Punkty: 3
+
+2) Napisz funkcję przyjmującą na wejściu wyżej wygenerowane drzewo i zwracającą iloczyn wszystkich jego elementów. Zwróć uwagę na wydajność rozwiązania.
+   Punkty: 3
+
+3) Napisz funkcję przechodzącą po drzewie, usuwającą powtarzające się wartości - duplikaty.
+   Zaimplementuj przechodząc po drzewie wgłąb (Punkty: 1.5) i wszerz (Punkty: 2.5)
