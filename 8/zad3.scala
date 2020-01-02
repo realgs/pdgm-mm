@@ -7,16 +7,11 @@ class DebugField(field: Field, newValue: Any) {
 
 sealed trait Debug {
 	def getClassName(): String = getClass.getSimpleName;
-	def getClassFields(): Array[DebugField] = {
-		val fields = getClass.getDeclaredFields;
-		val fieldsArray = new Array[DebugField](fields.length);
-		for (i <- 0 to (fields.size - 1)) {
-			val field = fields(i);
+	def getClassFields(): Array[DebugField] =
+		getClass.getDeclaredFields.map(field => {
 			field.setAccessible(true);
-			fieldsArray(i) = new DebugField(field, field.get(this));
-		}
-		fieldsArray;
-	};
+			new DebugField(field, field.get(this));
+		})
 }
 
 class Point(xv: Int, yv: Int) extends Debug {
