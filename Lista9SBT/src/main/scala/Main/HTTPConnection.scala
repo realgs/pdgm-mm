@@ -1,10 +1,8 @@
 package Main
 import org.jsoup.Jsoup
-import java.awt.image.BufferedImage
 import scala.concurrent._
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration.Duration
-import java.util.Random
 class HTTPConnection {
   def getWeather(): String ={
     val d = Jsoup.connect("https://pogoda.onet.pl/prognoza-pogody/wroclaw-362450").get()

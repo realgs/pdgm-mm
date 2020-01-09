@@ -15,15 +15,15 @@ object MainObj {
 
   def photoTests(tests: Int): Unit ={
     val test = new ScalaGPU
-    val photo1 = ImageIO.read(new File("C:\\Users\\Sebastian\\Desktop\\test.png"))
+    val photo1 = ImageIO.read(new File("C:\\Users\\spiet\\Desktop\\test.png"))
 
     val photo2 = test.phototestSeq(photo1)
     val photo3 =  test.phototestPar(photo1)
     val photo4 = test.phototestMorePar(photo1)
 
-    ImageIO.write(photo2, "jpg", new File("C:\\Users\\Sebastian\\Desktop\\test0.jpg"))
-    ImageIO.write(photo3, "jpg", new File("C:\\Users\\Sebastian\\Desktop\\test1.jpg"))
-    ImageIO.write(photo4, "jpg", new File("C:\\Users\\Sebastian\\Desktop\\test2.jpg"))
+    ImageIO.write(photo2, "jpg", new File("C:\\Users\\spiet\\Desktop\\test0.jpg"))
+    ImageIO.write(photo3, "jpg", new File("C:\\Users\\spiet\\Desktop\\test1.jpg"))
+    ImageIO.write(photo4, "jpg", new File("C:\\Users\\spiet\\Desktop\\test2.jpg"))
 
     println("\n                    Img")
     println("    SEQ    ---      2FUT    ---      4FUT")
@@ -82,14 +82,14 @@ object MainObj {
     testHttp(10)//90-100 vs 60-70
     testParColl(10)
     photoTests(10)
-    matricesTests(10, 10, 2)//170ms
-    matricesTests(10, 10, 3)//150ms
-    matricesTests(10, 10, 4)//130ms
-    matricesTests(10, 10, 5)//165ms
-    matricesTests(10, 10, 6) //100ms
-    matricesTests(10, 10, 7)//120ms
-    matricesTests(10, 10, 8)//135ms
-    matricesTests(10, 10, 9)//165ms
-    matricesTests(10, 10, 10)//170ms
+    matricesTests(10, 10, 2)//pc: 310vs170ms laptop: 415 - 255
+    matricesTests(10, 10, 3)//150ms - 220
+    matricesTests(10, 10, 4)//130ms - 195
+    matricesTests(10, 10, 5)//165ms - 245
+    matricesTests(10, 10, 6) //100ms - 145
+    matricesTests(10, 10, 7)//120ms - 170
+    matricesTests(10, 10, 8)//135ms - 195
+    matricesTests(10, 10, 9)//165ms - 235
+    matricesTests(10, 10, 10)//170ms - 250
   }
 }

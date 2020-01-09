@@ -1,3 +1,4 @@
-[debug] "not up to date. inChanged = true, force = false
-[debug] Updating ProjectRef(uri("file:/D:/Programowanie/Scala/Laby/src/pdgm-mm/Lista9SBT/"), "lista9sbt")...
-[debug] Done updating ProjectRef(uri("file:/D:/Programowanie/Scala/Laby/src/pdgm-mm/Lista9SBT/"), "lista9sbt")
+[warn] scala-parallel-collections_2.13-0.2.0-sources.jar no longer exists at C:\Users\Sebastian\AppData\Local\Coursier\cache\v1\https\repo1.maven.org\maven2\org\scala-lang\modules\scala-parallel-collections_2.13\0.2.0\scala-parallel-collections_2.13-0.2.0-sources.jar
+[debug] "not up to date. inChanged = false, force = false
+[debug] Updating ProjectRef(uri("file:/D:/GitProjects/pdgm-mm/Lista9SBT/"), "lista9sbt")...
+[debug] Done updating ProjectRef(uri("file:/D:/GitProjects/pdgm-mm/Lista9SBT/"), "lista9sbt")

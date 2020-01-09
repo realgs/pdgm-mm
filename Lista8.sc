@@ -1,6 +1,6 @@
 trait Debug {
   private def getClassName():String =
-    this.getClass.getName.substring(21)
+    this.getClass.getName
 
   def debugName(): Unit =
     println("Klasa: "+ getClassName())

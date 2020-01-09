@@ -7,7 +7,7 @@ def eachNElement[A](llist:Stream[A], n:Int, m:Int):Stream[A]={
     else helper(llist.tail, index+1)
 
   if(n<=0) throw new IllegalArgumentException("Niepoprawna wartosc n.")
-  if(m<=0) throw new IllegalArgumentException("Niepoprawna wartosc m.")
+  if(m<0) throw new IllegalArgumentException("Niepoprawna wartosc m.")
   helper(llist, 0)
 }
 
@@ -15,7 +15,7 @@ val test1 = Stream(5,6,3,2,1)
 val test2 = Stream()
 
 eachNElement(test1, 2, 3).force
-eachNElement(test1, 2, 4).force
+eachNElement(test1, 2, 0).force
 eachNElement(test1, 1, 2).force
 eachNElement(test2, 2, 3).force
 

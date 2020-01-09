@@ -6,7 +6,6 @@ import scala.concurrent.Future
 import scala.util.{Failure, Random, Success}
 import scala.concurrent.ExecutionContext.Implicits.global
 
-
 //data parallel - liczenie sredniej
 class ParColl{
   val r : Random = new Random()
