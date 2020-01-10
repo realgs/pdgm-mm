@@ -3,33 +3,11 @@ import java.util.concurrent.{ForkJoinPool, ForkJoinTask, ForkJoinWorkerThread, R
 import scala.util.{DynamicVariable, Random}
 
 object List9 extends App {
-  /*
-  def task[T](body: => T): Future[T] = {
-    Future {
-      val result = body
-      result
-    }
-  }
-
-  def parallel[A, B](taskA: => A, taskB: => B): (A, B) = {
-    val right = Future {
-      taskB
-    }
-    val left = Future {
-      taskA
-    }
-
-    val resultParallel = for {
-      result1 <- right
-      result2 <- left
-    } yield (result2, result1)
-
-    Await.result(resultParallel, Duration.Inf)
-  }
-  */
-
   //PARALLEL
   private val forkJoinPool = new ForkJoinPool
+
+  private val scheduler =
+    new DynamicVariable[TaskScheduler](new TaskScheduler)
 
   private class TaskScheduler {
     def schedule[T](body: => T): ForkJoinTask[T] = {
@@ -48,9 +26,6 @@ object List9 extends App {
       t
     }
   }
-
-  private val scheduler =
-    new DynamicVariable[TaskScheduler](new TaskScheduler)
 
   private def task[T](body: => T): ForkJoinTask[T] = {
     scheduler.value.schedule(body)
@@ -81,13 +56,17 @@ object List9 extends App {
   }
 
   def parCountChange(money: Int, coins: List[Int]): Int = {
-    if (money < 100 || coins.size < 3) countChange(money, coins)
-    else if (money == 0) 1
-    else if (coins.isEmpty || money < 0) 0
-    else {
-      val (left, right) = parallel(parCountChange(money - coins.head, coins), parCountChange(money, coins.tail))
-      left + right
+    def parCountChangeHelper(money: Int, coins: List[Int], depth: Int):Int= {
+      if (depth > 1) countChange(money, coins)
+      else if (money == 0) 1
+      else if (coins.isEmpty || money < 0) 0
+      else {
+        val (left, right) = parallel(parCountChangeHelper(money - coins.head, coins, depth + 1), parCountChangeHelper(money, coins.tail, depth + 1))
+        left + right
+      }
     }
+
+    parCountChangeHelper(money,coins,0)
   }
 
   //MERGESORT
@@ -111,16 +90,20 @@ object List9 extends App {
   }
 
   def parMergeSort(list: List[Int]): List[Int] = {
-    if (list.length < 100) mergeSort(list)
-    else {
-      val n = list.length / 2
-      if (n == 0) list
+    def parMergeSortHelper(list: List[Int], depth: Int): List[Int] = {
+      if (depth > 1) mergeSort(list)
       else {
-        val (left, right) = list.splitAt(n)
-        val (leftToMerge, rightToMerge) = parallel(parMergeSort(left), parMergeSort(right))
-        merge(leftToMerge, rightToMerge, Nil)
+        val n = list.length / 2
+        if (n == 0) list
+        else {
+          val (left, right) = list.splitAt(n)
+          val (leftToMerge, rightToMerge) = parallel(parMergeSortHelper(left, depth + 1), parMergeSortHelper(right, depth + 1))
+          merge(leftToMerge, rightToMerge, Nil)
+        }
       }
     }
+
+    parMergeSortHelper(list, 0)
   }
 
   //QUICKSORT
@@ -134,25 +117,31 @@ object List9 extends App {
   }
 
   def parQuickSort(list: List[Int]): List[Int] = {
-    if (list.length < 100) quickSort(list)
-    else {
-      if (list.length <= 1) list
+    def parQuickSortHelper(list: List[Int], depth: Int): List[Int] = {
+      if (depth > 1) quickSort(list)
       else {
-        val pivot = list.head
-        val (left, right) = list.tail.partition(_ < pivot)
-        val (leftToSort, rightToSort) = parallel(parQuickSort(left), parQuickSort(right))
-        leftToSort ::: pivot :: rightToSort
+        if (list.length <= 1) list
+        else {
+          val pivot = list.head
+          val (left, right) = list.tail.partition(_ < pivot)
+          val (leftToSort, rightToSort) = parallel(parQuickSortHelper(left, depth + 1), parQuickSortHelper(right, depth + 1))
+          leftToSort ::: pivot :: rightToSort
+        }
       }
     }
+
+    parQuickSortHelper(list, 0)
   }
 
+  //ZLICZANIE ELEMENTU W DRZEWIE
   sealed trait BT[+Int]
 
   case object Empty extends BT[Nothing]
 
   case class Node[+Int](elem: Int, left: BT[Int], right: BT[Int]) extends BT[Int]
 
-  def dfsSearch(tree: BT[Int], element: Int): Int = {
+  def dfsCount(tree: BT[Int], element: Int): Int = {
+    @scala.annotation.tailrec
     def helper(queue: List[BT[Int]], accum: Int): Int = {
       queue match {
         case Nil => accum
@@ -166,9 +155,9 @@ object List9 extends App {
     helper(List(tree), 0)
   }
 
-  def parDFSSearch(tree: BT[Int], element: Int): Int = {
+  def parDFSCount(tree: BT[Int], element: Int): Int = {
     def helper(current: BT[Int], depth: Int, accum: Int): Int = {
-      if (depth > 9) dfsSearch(current, element)
+      if (depth > 1) dfsCount(current, element)
       else {
         current match {
           case Empty => accum
@@ -185,6 +174,7 @@ object List9 extends App {
     helper(tree, 0, 0)
   }
 
+  //HELPERS
   def randomList(n: Int): List[Int] = {
     val rand = new Random()
     List.fill(n)(rand.nextInt(10000))
@@ -206,30 +196,32 @@ object List9 extends App {
     else Empty
   }
 
+  //TEST
   println("CountChange: ")
   print("Concurrent: ")
   time(countChange(1000, List(5, 6, 7, 8, 9)))
   print("Parallel: ")
   time(parCountChange(1000, List(5, 6, 7, 8, 9)))
 
+  println("Zliczanie wystapien danego elementu w drzewie")
+  val tree = createTree(20, 1000)
+  print("Concurrent: ")
+  time(dfsCount(tree, 10))
+  print("Parallel: ")
+  time(parDFSCount(tree, 10))
+
   println("Mergesort dla listy losowych elementów")
-  val list = randomList(200000)
+  val list = randomList(1000000)
   print("Concurrent: ")
   time(mergeSort(list))
   print("Parallel: ")
   time(parMergeSort(list))
 
   println("Quicksort dla listy losowych elementów")
-  val list1 = randomList(200000)
+  val list1 = randomList(1000000)
   print("Concurrent: ")
   time(quickSort(list))
   print("Parallel: ")
   time(parQuickSort(list))
 
-  println("Zliczanie wystapien danego elementu w drzewie")
-  val tree = createTree(20, 1000)
-  print("Parallel: ")
-  time(parDFSSearch(tree, 10))
-  print("Concurrent: ")
-  time(dfsSearch(tree, 10))
 }
