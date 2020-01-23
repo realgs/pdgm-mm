@@ -1,19 +1,20 @@
 package Actors
 
+import akka.actor.{Actor, ActorRef, Props}
 import Actors.Player.{MakeMove, Move}
 import Actors.Server.BadMove
-import GameObjects.AI.HumanPlayer
-import GameObjects.Utilities.{Board, GameFinished, InvalidSenderException, PlayerLower, PlayerPosition, PlayerUpper, Timer}
-import akka.actor.{Actor, ActorRef, Props}
+import GameObjects.AI.MoveDecider
+import GameObjects.Utilities._
 
-class Server(private val timeForTurn : Long = 10) extends Actor{
+class Server(playerA: MoveDecider, playerB: MoveDecider, private val timeForTurn: Long = 10) extends Actor {
   val timer = new Timer()
   val board = new Board(6)
-  val upperChild: ActorRef = context.actorOf(Props(classOf[Player], new HumanPlayer(board)))
-  val lowerChild: ActorRef = context.actorOf(Props(classOf[Player], new HumanPlayer(board)))
+  val upperChild: ActorRef = context.actorOf(Props(classOf[Player], playerA))
+  val lowerChild: ActorRef = context.actorOf(Props(classOf[Player], playerB))
   upperChild ! MakeMove()
+
   override def receive: Receive = {
-    case turn : Move =>
+    case turn: Move =>
       try {
         if (timer.getTimeSeconds < timeForTurn) {
           if (sender() == upperChild) {
@@ -25,19 +26,20 @@ class Server(private val timeForTurn : Long = 10) extends Actor{
           } else throw new InvalidSenderException("Unknown sender")
           timer.restart()
         }
-        else println("time out")
+        else context.parent ! GameFinished()
       }
       catch {
-        case e : IllegalArgumentException => {
+        case e: IllegalArgumentException => {
           println("here")
           sender() ! BadMove()
         }
       }
     case GameFinished() => {
-      println("Game Finished!")
+      context.parent ! GameFinished()
     }
   }
-  private def findDestination(sendTo : PlayerPosition) ={
+
+  private def findDestination(sendTo: PlayerPosition) = {
     sendTo match {
       case PlayerUpper() => upperChild
       case PlayerLower() => lowerChild
@@ -47,5 +49,7 @@ class Server(private val timeForTurn : Long = 10) extends Actor{
 }
 
 object Server {
+
   case class BadMove()
+
 }
