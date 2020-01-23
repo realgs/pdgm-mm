@@ -5,10 +5,14 @@ sealed trait PlayerPosition {
 }
 case class PlayerUpper() extends PlayerPosition {
   override def opponent: PlayerPosition = PlayerLower()
+
+  override def toString: String = "player lower"
 }
 case class PlayerLower() extends PlayerPosition {
   override def opponent: PlayerPosition = PlayerUpper()
+
+  override def toString: String = "player upper"
 }
-case class GameFinished() extends PlayerPosition {
+case class GameFinished(val message : String = "") extends PlayerPosition {
   override def opponent: PlayerPosition = ???
 }

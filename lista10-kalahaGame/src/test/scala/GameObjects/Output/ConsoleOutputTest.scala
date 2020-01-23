@@ -8,5 +8,4 @@ class ConsoleOutputTest extends org.scalatest.FunSuite with Matchers{
   test("printGame no throws test") {
     noException should be thrownBy printer.printGame()
   }
-
 }

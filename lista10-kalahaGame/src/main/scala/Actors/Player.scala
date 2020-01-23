@@ -7,8 +7,10 @@ import akka.actor.Actor
 
 class Player(val playerDecider: MoveDecider) extends Actor {
   override def receive: Receive = {
-    case MakeMove() => makeMove()
-    case BadMove() => makeMove()
+    case MakeMove() =>
+      makeMove()
+    case BadMove() =>
+      makeMove()
 
   }
 
