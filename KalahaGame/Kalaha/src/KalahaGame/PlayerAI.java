@@ -57,7 +57,7 @@ public class PlayerAI implements KalahaPlayer{
     public int playerTurn(Kalaha currentState)
     {
         MiniMaxTree miniMaxTree = new MiniMaxTree();
-        int depth = 5;
+        int depth = 6;
         miniMaxTree.createTree(depth, currentState);
 
         return miniMaxTree.calculateMove(miniMaxTree.getRoot(), depth);

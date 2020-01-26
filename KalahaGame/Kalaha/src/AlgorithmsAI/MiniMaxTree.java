@@ -21,10 +21,10 @@ public class MiniMaxTree {
 
         root = new Node(0,0, startingState, children);
 
-        fillTree(root, depth);
+        fillTree(root, depth, startingState.isWhichPlayerTurn());
     }
 
-    private void fillTree(Node current, int depth)
+    private void fillTree(Node current, int depth, boolean whichPlayer)
     {
         if(depth < 0) return;
 
@@ -50,11 +50,16 @@ public class MiniMaxTree {
                     }
                 }
 
+                int score = Integer.MIN_VALUE;
+
+                if(whichPlayer == Constants.FIRST_PLAYER_TURN) score = copy.getFirstPlayerPoints() - copy.getSecondPlayerPoints();
+                else score = copy.getSecondPlayerPoints() - copy.getFirstPlayerPoints();
+
                 child = new Node(copy.getFirstPlayerPoints() - copy.getSecondPlayerPoints(), i , copy, children);
 
                 current.getChildren().add(child);
 
-                fillTree(child, depth-1);
+                fillTree(child, depth-1, whichPlayer);
             }
         }
     }
@@ -65,7 +70,7 @@ public class MiniMaxTree {
         int move = 0;
         for (Node child: node.children) {
             int current = minimax(child, depth, true);
-            if(best < current)
+            if(best <= current)
             {
                 move = child.move;
                 best = current;
