@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="dca57f91-9e01-4784-bc95-489d5ca50425" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/scala/Example3/Benchmark.scala" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/scala/Example3/Quicksort.scala" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/scala/Example3/QuicksortPar.scala" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/scala/example1/BTree.scala" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/scala/example1/BTreeTools.scala" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/scala/example1/BTreeToolsPar.scala" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/scala/example1/GenerateBench.scala" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/scala/example1/MultiplyBench.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lista10-kalahaGame/build.sbt" beforeDir="false" afterPath="$PROJECT_DIR$/../lista10-kalahaGame/build.sbt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lista10-kalahaGame/src/main/scala/Actors/GameManager.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../lista10-kalahaGame/src/main/scala/Actors/GameManager.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lista10-kalahaGame/src/test/scala/GameObjects/Output/ConsoleOutputTest.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../lista10-kalahaGame/src/test/scala/GameObjects/Output/ConsoleOutputTest.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lista5/src/lista5/Lista5.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../lista5/src/lista5/Lista5.scala" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="DefaultGradleProjectSettings">
+    <option name="isMigrated" value="true" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="D:\paradygmaty\pdgm-mm\lista9-parallel\.idea" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
+  <component name="ProjectId" id="1WqyVPKAZbTvEd2bVMV3xseXzIC" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.other" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Benchmark" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="Example3.Benchmark" />
+      <module name="lista9-parallel" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Example3.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GenerateBench" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="example1.GenerateBench" />
+      <module name="lista9-parallel" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="example1.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="example1.MultiplyBench" />
+      <module name="lista9-parallel" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="example1.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MergeSort" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="MergeSort" />
+      <module name="lista9-parallel" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Benchmark" />
+        <item itemvalue="Application.MergeSort" />
+        <item itemvalue="Application.GenerateBench" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SbtLocalSettings">
+    <option name="availableProjects">
+      <map>
+        <entry>
+          <key>
+            <ExternalProjectPojo>
+              <option name="name" value="lista9-parallel" />
+              <option name="path" value="$PROJECT_DIR$" />
+            </ExternalProjectPojo>
+          </key>
+          <value>
+            <list>
+              <ExternalProjectPojo>
+                <option name="name" value="lista9-parallel [file:/D:/paradygmaty/pdgm-mm/lista9-parallel/]" />
+                <option name="path" value="$PROJECT_DIR$" />
+              </ExternalProjectPojo>
+              <ExternalProjectPojo>
+                <option name="name" value="lista9-parallel-build" />
+                <option name="path" value="$PROJECT_DIR$/project" />
+              </ExternalProjectPojo>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="modificationStamps">
+      <map>
+        <entry key="$PROJECT_DIR$/build.sbt" value="813224876" />
+        <entry key="$PROJECT_DIR$/project/build.properties" value="3666975207" />
+      </map>
+    </option>
+    <option name="projectSyncType">
+      <map>
+        <entry key="$USER_HOME$/Desktop/akka-quickstart-scala" value="PREVIEW" />
+      </map>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="dca57f91-9e01-4784-bc95-489d5ca50425" name="Default Changelist" comment="" />
+      <created>1579891442574</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1579891442574</updated>
+      <workItem from="1579891447474" duration="1942000" />
+      <workItem from="1580077841685" duration="7475000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
