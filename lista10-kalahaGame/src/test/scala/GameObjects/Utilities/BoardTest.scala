@@ -153,7 +153,7 @@ class BoardTakingTest extends FunSuite with BeforeAndAfterEach {
     assert(board.playerUpperHouseValue(0) == 0)
   }
 
-  private def performGame(player: PlayerPosition) = {
+  private def performGame(player: PlayerPosition): Unit = {
     val output = new ConsoleOutput(board)
     board.move(5, player)
     output.printGame()
