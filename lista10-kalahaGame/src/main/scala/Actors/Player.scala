@@ -11,7 +11,6 @@ class Player(val playerDecider: MoveDecider) extends Actor {
       makeMove()
     case BadMove() =>
       makeMove()
-
   }
 
   private def makeMove(): Unit = {

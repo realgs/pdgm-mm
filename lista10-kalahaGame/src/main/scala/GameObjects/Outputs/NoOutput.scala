@@ -1,6 +1,4 @@
-package GameObjects.Output
-
-import GameObjects.Outputs.Output
+package GameObjects.Outputs
 
 class NoOutput extends Output{
   override def printGame(): Unit = ()

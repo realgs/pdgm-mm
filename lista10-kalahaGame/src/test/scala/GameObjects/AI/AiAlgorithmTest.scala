@@ -1,4 +1,4 @@
-package GameObjects.AiAlgorithms
+package GameObjects.AI
 
 import GameObjects.AI.AiAlgorithm
 import GameObjects.Outputs.ConsoleOutput

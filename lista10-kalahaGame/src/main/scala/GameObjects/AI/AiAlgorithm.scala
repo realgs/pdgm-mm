@@ -3,7 +3,6 @@ package GameObjects.AI
 import GameObjects.Utilities.{Board, GameFinished, PlayerPosition}
 
 class AiAlgorithm(private val gameBoard: Board, private val aisPosition: PlayerPosition, private val algorithmDepth: Int) extends MoveDecider {
-  private var counter = 0
   override def getMove: Int = {
       val scores = new Array[Int](6)
       for (i <- scores.indices) {

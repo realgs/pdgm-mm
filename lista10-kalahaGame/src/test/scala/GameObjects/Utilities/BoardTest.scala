@@ -1,5 +1,6 @@
 package GameObjects.Utilities
 
+import GameObjects.Outputs.ConsoleOutput
 import org.scalatest._
 
 class BoardTest extends FunSuite {
@@ -123,5 +124,40 @@ class BoardTest extends FunSuite {
     assertThrows[IllegalArgumentException] {
       board.move(0, PlayerLower())
     }
+  }
+}
+
+class BoardTakingTest extends FunSuite with BeforeAndAfterEach {
+  val seedsInPit = 4
+  var board : Board = _
+
+  override def beforeEach() {
+    board = new Board(seedsInPit)
+  }
+
+  test("UpperTakesTest") {
+    val player = PlayerUpper()
+    performGame(player)
+
+    assert(board.playerUpperScore == 7)
+    assert(board.playerUpperHouseValue(5) == 0)
+    assert(board.playerLowerHouseValue(0) == 0)
+  }
+
+  test("LowerTakesTest") {
+    val player = PlayerLower()
+    performGame(player)
+
+    assert(board.playerLowerScore == 7)
+    assert(board.playerLowerHouseValue(5) == 0)
+    assert(board.playerUpperHouseValue(0) == 0)
+  }
+
+  private def performGame(player: PlayerPosition) = {
+    val output = new ConsoleOutput(board)
+    board.move(5, player)
+    output.printGame()
+    board.move(1, player)
+    output.printGame()
   }
 }

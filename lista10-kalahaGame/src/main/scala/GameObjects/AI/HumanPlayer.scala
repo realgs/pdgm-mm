@@ -6,7 +6,6 @@ import GameObjects.Utilities.Board
 class HumanPlayer(private val board: Board) extends MoveDecider {
   private val view = new ConsoleOutput(board)
   override def getMove: Int = {
-    view.printGame()
     scala.io.StdIn.readInt()
   }
 

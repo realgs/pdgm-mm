@@ -79,7 +79,7 @@ class Board(seedsInPit: Int) {
         if (sumPoints(playerPosition) == 0) finishGame(playerPosition)
         else playerPosition
       }
-      else if (samePlayers(pit, previousIndex) && pits(previousIndex) == 1) {
+      else if (samePlayers(realIndex, previousIndex) && pits(previousIndex) == 1) {
         val opposite = oppositeIndex(previousIndex)
         val store = playersStoreIndex(previousIndex)
         pits(store) += pits(opposite)
