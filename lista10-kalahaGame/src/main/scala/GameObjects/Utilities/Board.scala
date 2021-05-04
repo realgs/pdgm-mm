@@ -10,11 +10,6 @@ class Board(seedsInPit: Int) {
   pits(storeA) = 0
   pits(storeB) = 0
 
-  def playerUpperHouseValue(index: Int): Int = {
-    require(index >= 0 && index < storeA)
-    pits(index + 7)
-  }
-
   def playerUpperPits: Array[Int] = pits.slice(storeA + 1, storeB)
 
   private def playersStoreIndex(playerPosition: PlayerPosition): Int = {
@@ -26,8 +21,13 @@ class Board(seedsInPit: Int) {
   }
 
   def playerLowerHouseValue(index: Int): Int = {
-    require(index >= 0 && index < storeA)
+    require(index >= 0 && index < storeA, s"Invalid index $index")
     pits(index)
+  }
+
+  def playerUpperHouseValue(index: Int): Int = {
+    require(index >= 0 && index < storeA, s"Invalid index $index")
+    pits(index + 7)
   }
 
   def playerLowerPits: Array[Int] = pits.slice(0, storeA)
@@ -134,6 +134,7 @@ class Board(seedsInPit: Int) {
 
   override def clone(): Board = {
     val toReturn = new Board(0)
+    toReturn.toMove = toMove
     for (i <- toReturn.pits.indices)
       toReturn.pits(i) = pits(i)
     toReturn
