@@ -4,7 +4,7 @@ class Board(seedsInPit: Int) {
   val pits: Array[Int] = Array.fill(14) {
     seedsInPit
   }
-  var toMove : PlayerPosition = PlayerUpper()
+  var toMove: PlayerPosition = PlayerUpper()
   private val storeA = 6
   private val storeB = 13
   pits(storeA) = 0
@@ -40,7 +40,7 @@ class Board(seedsInPit: Int) {
     }
   }
 
-  def playerPit(player : PlayerPosition, index : Int): Int = {
+  def playerPit(player: PlayerPosition, index: Int): Int = {
     player match {
       case PlayerUpper() => playerUpperHouseValue(index)
       case PlayerLower() => playerLowerHouseValue(index)
@@ -65,7 +65,8 @@ class Board(seedsInPit: Int) {
     val realIndex = findRealIndex(pit, playerPosition)
     val opponentsStore = opponentsStoreIndex(realIndex)
     val seeds = pits(realIndex)
-    if (pits(realIndex) == 0) throw new IllegalArgumentException("Cannot move from empty pit number " + pit + " realIndex = " + realIndex)
+    if (pits(realIndex) == 0)
+      throw new IllegalArgumentException("Cannot move from empty pit number " + pit + " realIndex = " + realIndex)
     pits(realIndex) = 0
 
     @scala.annotation.tailrec
@@ -76,24 +77,32 @@ class Board(seedsInPit: Int) {
         pitVisitor(index, seeds - 1)
       }
       else if (!isHouse(previousIndex)) {
-        if (sumPoints(playerPosition) == 0) finishGame(playerPosition)
+        if (endOfGame()) finishGame(playerPosition)
         else playerPosition
       }
       else if (samePlayers(realIndex, previousIndex) && pits(previousIndex) == 1) {
+        toMove = toMove.opponent
         val opposite = oppositeIndex(previousIndex)
         val store = playersStoreIndex(previousIndex)
         pits(store) += pits(opposite)
         pits(opposite) = 0
         pits(previousIndex) = 0
         pits(store) += 1
-        if (sumPoints(playerPosition) == 0) finishGame(playerPosition)
+        if (endOfGame()) finishGame(playerPosition)
         else playerPosition.opponent
       }
-      else playerPosition.opponent
+      else {
+        toMove = toMove.opponent
+        if (endOfGame()) finishGame(playerPosition)
+        else playerPosition.opponent
+      }
     }
 
-    toMove = pitVisitor(realIndex, seeds)
-    toMove
+    pitVisitor(realIndex, seeds)
+  }
+
+  private def endOfGame() = {
+    sumPoints(toMove) == 0
   }
 
   private def findRealIndex(index: Int, player: PlayerPosition) = {
@@ -142,7 +151,7 @@ class Board(seedsInPit: Int) {
 }
 
 object Board {
-  def createPosition(allPits: Seq[Int], nextMoves: PlayerPosition) : Board ={
+  def createPosition(allPits: Seq[Int], nextMoves: PlayerPosition): Board = {
     require(allPits.length == 14, "invalid array length " + allPits.length)
     val board = new Board(1)
     for (i <- board.pits.indices)
