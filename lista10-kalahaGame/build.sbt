@@ -1,4 +1,4 @@
-name := "lista10-kalahaGame"
+name := "kalahaGame"
 
 version := "0.1"
 
