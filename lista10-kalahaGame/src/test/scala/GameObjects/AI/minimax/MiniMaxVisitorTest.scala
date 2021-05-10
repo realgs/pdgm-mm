@@ -20,11 +20,10 @@ class MiniMaxVisitorTest extends AnyFunSuite {
       pits(i * 2 + 9) = 100 / (i * 10 + 1)
 
 
-    val tree = miniMaxAlgorithm.generateCombinations(5)
-    val resultForWinner = miniMaxVisitor.minimax(tree, PlayerLower(), board)
+    val resultForWinner = miniMaxVisitor.minimax(5, PlayerLower(), board)
     new ConsoleOutput(board).printGame()
     board.toMove = PlayerUpper()
-    val resultForLoser = miniMaxVisitor.minimax(tree, PlayerUpper(), board)
+    val resultForLoser = miniMaxVisitor.minimax(5, PlayerUpper(), board)
 
     assert(resultForWinner == 2)
     assert(resultForLoser == 2)
@@ -39,8 +38,7 @@ class MiniMaxVisitorTest extends AnyFunSuite {
     pits(3) = 4
     new ConsoleOutput(board).printGame()
 
-    val tree = miniMaxAlgorithm.generateCombinations(9)
-    val result = miniMaxVisitor.minimax(tree, PlayerLower(), board)
+    val result = miniMaxVisitor.minimax(10, PlayerLower(), board)
 
     assert(result == 5)
   }
