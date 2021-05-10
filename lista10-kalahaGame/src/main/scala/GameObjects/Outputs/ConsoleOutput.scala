@@ -35,5 +35,5 @@ class ConsoleOutput(private val board: Board) extends Output {
     println("to move " + board.toMove)
   }
 
-  override def putMessage(message: String): Unit = println("message")
+  override def putMessage(message: String): Unit = println(message)
 }

@@ -1,6 +1,5 @@
 package GameObjects.AI
 
-import GameObjects.AI.AiAlgorithm
 import GameObjects.Outputs.ConsoleOutput
 import GameObjects.Utilities.{Board, PlayerLower, PlayerUpper}
 
@@ -67,5 +66,4 @@ class AiAlgorithmTest extends org.scalatest.FunSuite {
     val ai = new AiAlgorithm(board, player, 1)
     assert(ai.getMove == 3)
   }
-
 }

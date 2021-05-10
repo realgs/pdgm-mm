@@ -33,8 +33,7 @@ class GameManager extends Actor{
   }
 
   override def receive: Receive = {
-    case GameFinished(string) =>
-      println("Game finished " + string)
+    case GameFinished(_) =>
       setUp()
   }
 }

@@ -18,19 +18,17 @@ class Server(playerA: MoveDecider, playerB: MoveDecider, private val board: Boar
     case turn: Move =>
       try {
         if (timer.getTimeSeconds < timeForTurn) {
-          if (sender() == upperChild) {
-            val destination = board.move(turn.house, PlayerUpper())
-            if (destination.isInstanceOf[GameFinished])
-              context.parent ! GameFinished("player A won")
-            else findDestination(destination) ! MakeMove()
-          } else if (sender() == lowerChild) {
-            val destination = board.move(turn.house, PlayerLower())
-            if (destination.isInstanceOf[GameFinished])
-              context.parent ! GameFinished("player B won")
-            else findDestination(destination) ! MakeMove()
+          val player =
+            if (sender() == lowerChild) PlayerLower()
+            else if (sender() == upperChild) PlayerUpper()
+            else throw new InvalidSenderException("Unknown sender")
+          val destination = board.move(turn.house, player)
+          if (destination.isInstanceOf[GameFinished])
+            finishGame()
+          else {
+            serverOutput.printGame()
+            findDestination(destination) ! MakeMove()
           }
-          else throw new InvalidSenderException("Unknown sender")
-          serverOutput.printGame()
           timer.restart()
         }
         else context.parent ! GameFinished("time out")
@@ -42,7 +40,13 @@ class Server(playerA: MoveDecider, playerB: MoveDecider, private val board: Boar
           sender() ! BadMove()
       }
     case GameFinished(_) =>
-      context.parent ! GameFinished()
+      finishGame()
+  }
+
+  private def finishGame() = {
+    val message = s"Game finished. Result: ${board.playerUpperScore} - ${board.playerLowerScore}"
+    serverOutput.putMessage(message)
+    context.parent ! GameFinished()
   }
 
   private def findDestination(sendTo: PlayerPosition): ActorRef = {
