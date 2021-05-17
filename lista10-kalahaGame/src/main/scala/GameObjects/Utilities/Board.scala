@@ -77,28 +77,34 @@ class Board(seedsInPit: Int) {
         pitVisitor(index, seeds - 1)
       }
       else if (!isHouse(previousIndex)) {
-        if (endOfGame()) finishGame(playerPosition)
+        if (endOfGame()) finishGame
         else playerPosition
       }
-      else if (samePlayers(realIndex, previousIndex) && pits(previousIndex) == 1) {
+      else if (samePlayers(realIndex, previousIndex) && pits(previousIndex) == 1) { //may take
         toMove = toMove.opponent
         val opposite = oppositeIndex(previousIndex)
         val store = playersStoreIndex(previousIndex)
-        pits(store) += pits(opposite)
-        pits(opposite) = 0
-        pits(previousIndex) = 0
-        pits(store) += 1
-        if (endOfGame()) finishGame(playerPosition)
+        if (pits(opposite) != 0) {
+          take(previousIndex, opposite, store)
+        }
+        if (endOfGame()) finishGame
         else playerPosition.opponent
       }
       else {
         toMove = toMove.opponent
-        if (endOfGame()) finishGame(playerPosition)
+        if (endOfGame()) finishGame
         else playerPosition.opponent
       }
     }
 
     pitVisitor(realIndex, seeds)
+  }
+
+  private def take(previousIndex: Int, opposite: Int, store: Int): Unit = {
+    pits(store) += pits(opposite)
+    pits(opposite) = 0
+    pits(previousIndex) = 0
+    pits(store) += 1
   }
 
   private def endOfGame() = {
@@ -133,11 +139,14 @@ class Board(seedsInPit: Int) {
 
   private def sumPoints(player: PlayerPosition) = playerPits(player).sum
 
-  private def finishGame(winner: PlayerPosition): PlayerPosition = {
-    pits(playersStoreIndex(winner)) += sumPoints(winner.opponent)
-    val losersStore = playersStoreIndex(winner.opponent)
-    for (i <- losersStore - storeA until losersStore)
-      pits(i) = 0
+  private def finishGame: PlayerPosition = {
+    pits(playersStoreIndex(toMove.opponent)) += sumPoints(toMove) + sumPoints(toMove.opponent)
+    for (i <- 0 to storeB) {
+      if (!(i == storeA || i == storeB)) {
+        pits(i) = 0
+      }
+    }
+    toMove = GameFinished()
     GameFinished()
   }
 

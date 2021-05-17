@@ -3,18 +3,18 @@ package GameObjects.AI.minimax
 import GameObjects.AI.evaluation.EvaluationStrategy
 import GameObjects.Utilities.{Board, GameFinished, PlayerPosition}
 
-class MiniMaxVisitor(evaluationStrategy: EvaluationStrategy) {
-  private var playerPosition: PlayerPosition = _
+class MiniMaxVisitor(protected val evaluationStrategy: EvaluationStrategy, protected val nodeChildrenNumber: Int = 5) {
+  private var maxPlayerPosition: PlayerPosition = _
 
   def isLegalToMove(houseToMove: Int, board: Board, player: PlayerPosition): Boolean = {
     board.playerPit(player, houseToMove) != 0
   }
 
-  private def minimax(depth: Int, player: PlayerPosition, board: Board, houseToMove: Int): Int = {
+  protected def minimax(depth: Int, player: PlayerPosition, board: Board, houseToMove: Int): Int = {
     depth match {
       case x if x < 0 => throw new IllegalArgumentException(s"depth = $x")
       case 0 =>
-        move(player, board, houseToMove)
+        countPosition(player, board, houseToMove)
       case _ =>
         if (isLegalToMove(houseToMove, board, board.toMove)) {
           if (!shouldSkipTurn(player, board)) {
@@ -31,13 +31,13 @@ class MiniMaxVisitor(evaluationStrategy: EvaluationStrategy) {
   }
 
   def minimax(depth: Int, player: PlayerPosition, board: Board): Int = {
-    playerPosition = player
+    maxPlayerPosition = player
     val children = iterateOverPossibilities(depth, player, board)
     children.indices.maxBy(children)
   }
 
-  private def iterateOverPossibilities(depth: Int, player: PlayerPosition, board: Board) = {
-    (0 to 5).map(child => minimax(depth, player, board.clone(), child))
+  protected def iterateOverPossibilities(depth: Int, player: PlayerPosition, board: Board): Seq[Int] = {
+    (0 to nodeChildrenNumber).map(child => minimax(depth, player, board.clone(), child))
   }
 
   private def shouldSkipTurn(player: PlayerPosition, board: Board) = {
@@ -55,25 +55,24 @@ class MiniMaxVisitor(evaluationStrategy: EvaluationStrategy) {
     }
   }
 
-  private def move(player: PlayerPosition, board: Board, house: Int) = {
-    if (board.toMove != player) {
+  private def countPosition(player: PlayerPosition, board: Board, house: Int) = {
+    var toReturn: Int = Int.MinValue;
+    if (shouldSkipTurn(player, board)) {
       val result = evaluationStrategy.evaluate(player, board)
-      result
+      toReturn = result
     }
     else if (isLegalToMove(house, board, player)) {
       val next = board.move(house, board.toMove)
       val result = evaluationStrategy.evaluate(player, board)
       if (next == GameFinished()) {
-        handleGameFinished(result)
+        toReturn = handleGameFinished(result)
       }
       else {
         val result = evaluationStrategy.evaluate(player, board)
-        result
+        toReturn = result
       }
     }
-    else {
-      Int.MinValue
-    }
+    toReturn
   }
 
   private def moveAllPossibilities(nextPlayer: PlayerPosition, board: Board, depth: Int) = {

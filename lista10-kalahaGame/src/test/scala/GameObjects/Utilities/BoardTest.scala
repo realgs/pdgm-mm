@@ -2,8 +2,9 @@ package GameObjects.Utilities
 
 import GameObjects.Outputs.ConsoleOutput
 import org.scalatest._
+import org.scalatest.funsuite.AnyFunSuite
 
-class BoardTest extends FunSuite {
+class BoardTest extends AnyFunSuite {
 
   val seedsInPit = 6
   val board = new Board(seedsInPit)
@@ -78,13 +79,6 @@ class BoardTest extends FunSuite {
     assert(board.playerLowerScore == 12)
   }
 
-  test("game finished last seed in player's store test") {
-    val board = makeGameToFinishInOneTurn()
-    assert(GameFinished() == board.move(5, PlayerLower()))
-    assert(36 == board.playerLowerScore)
-    assert(0 == board.playerUpperScore)
-  }
-
   def makeGameToFinishInOneTurn(): Board = {
     val player = PlayerLower()
     val position = Array(0, 0, 0, 0, 0, 8, 7, 5, 4, 1, 4, 4, 3, 0)
@@ -127,7 +121,7 @@ class BoardTest extends FunSuite {
   }
 }
 
-class BoardTakingTest extends FunSuite with BeforeAndAfterEach {
+class BoardTakingTest extends AnyFunSuite with BeforeAndAfterEach {
   val seedsInPit = 4
   var board : Board = _
 

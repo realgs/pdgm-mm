@@ -12,7 +12,8 @@ class Server(playerA: MoveDecider, playerB: MoveDecider, private val board: Boar
   val timer = new Timer()
   val upperChild: ActorRef = context.actorOf(Props(classOf[Player], playerA))
   val lowerChild: ActorRef = context.actorOf(Props(classOf[Player], playerB))
-  upperChild ! MakeMove()
+
+  (if (board.toMove == PlayerUpper()) upperChild else lowerChild) ! MakeMove()
 
   override def receive: Receive = {
     case turn: Move =>
@@ -43,7 +44,7 @@ class Server(playerA: MoveDecider, playerB: MoveDecider, private val board: Boar
       finishGame()
   }
 
-  private def finishGame() = {
+  private def finishGame(): Unit = {
     val message = s"Game finished. Result: ${board.playerUpperScore} - ${board.playerLowerScore}"
     serverOutput.putMessage(message)
     context.parent ! GameFinished()

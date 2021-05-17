@@ -2,8 +2,9 @@ package GameObjects.AI
 
 import GameObjects.Outputs.ConsoleOutput
 import GameObjects.Utilities.{Board, PlayerLower, PlayerUpper}
+import org.scalatest.funsuite.AnyFunSuite
 
-class AiAlgorithmTest extends org.scalatest.FunSuite {
+class AiAlgorithmTest extends AnyFunSuite {
   test("win in one move test") {
     val board = new Board(1)
     val player = PlayerLower()

@@ -7,6 +7,8 @@ import GameObjects.Utilities._
 import akka.actor.{Actor, Props}
 
 import scala.io.StdIn
+import scala.io.StdIn.readLine
+import scala.util.Random
 
 class GameManager extends Actor{
   setUp()
@@ -20,9 +22,18 @@ class GameManager extends Actor{
       println("playerB: (h/ai)")
       val playerBIn = scala.io.StdIn.readLine()
       val playerB = if (playerBIn == "h") new HumanPlayer(board) else getAi(PlayerLower(), board)
+      firstRandomMove(board)
       val output = new ConsoleOutput(board)
       output.printGame()
       context.actorOf(Props(classOf[Server], playerA, playerB, board, Long.MaxValue: Long, output))
+    }
+  }
+
+  private def firstRandomMove(board: Board) = {
+    println("First random? (y/n)")
+    val firstRandom = readLine()
+    if (firstRandom == "y") {
+      board.move(Random.nextInt(6), PlayerUpper())
     }
   }
 
